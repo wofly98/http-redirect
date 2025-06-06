@@ -14,22 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build with dockcross (mips)
-        uses: dockcross/dockcross@master
-        with:
-          image: mips
-          args: |
-            bash -c '
-              set -ex
-              # 编译你的C语言项目
-              # 假设你的项目使用Makefile
-              make
-              # 你也可以直接调用交叉编译器
-              # $CC -o my_program my_source.c
-              pwd
-              ls
-            '
+      - name: Install MIPS cross-compiler
+        run: sudo apt-get update && sudo apt-get install gcc-mips-linux-gnu
 
+      - name: Compile C code for MIPS
+        run: mips-linux-gnu-gcc -o http-redirect http-redirect.c -W -Wall -Wextra -pedantic -O2
+        
+      - name: check result
+        run: pwd && ls -l
+        
       - name: Upload MIPS artifact
         uses: actions/upload-artifact@v4
         with:
