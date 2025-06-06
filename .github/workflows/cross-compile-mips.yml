@@ -18,10 +18,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install gcc-mips-linux-gnu
 
       - name: Compile C code for MIPS
-        run: mips-linux-gnu-gcc -o http-redirect http-redirect.c -W -Wall -Wextra -pedantic -O2
+        run: mips-linux-gnu-gcc -o http-redirect http-redirect.c -W -Wall -Wextra -pedantic -O2 -msoft-float -static
         
       - name: check result
-        run: pwd && ls -l
+        run: pwd && ls -l && ls -l /usr/lib/gcc-cross/mips-linux-gnu/5/../../../../mips-linux-gnu/lib/../lib/soft-float/libc.a || echo done
         
       - name: Upload MIPS artifact
         uses: actions/upload-artifact@v4
