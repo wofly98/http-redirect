@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install MIPS cross-compiler
-        run: sudo apt-get update && sudo apt-get install gcc-mipsel-linux-gnu binutils-mipsel-linux-gnu g++-multilib libc6-dev-i386
+        run: sudo apt-get update && sudo apt-get install gcc-mipsel-linux-gnu binutils-mipsel-linux-gnu 
 
       - name: Compile C code for MIPS
         run: mipsel-linux-gnu-gcc -o http-redirect http-redirect.c -W -Wall -Wextra -pedantic -O2 -msoft-float -static -mfp32
